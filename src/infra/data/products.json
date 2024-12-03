@@ -1,0 +1,434 @@
+[
+	{
+		"id": 1,
+		"title": "Good Headphone",
+		"imageUrl": "https://m.media-amazon.com/images/I/51rpbVmi9XL._AC_SL1200_.jpg",
+		"description": "Sony’s lightest wireless noise canceling headband ever: Weighing just 192g, our lightest overhead wireless headphones with Noise Canceling yet, for incredible comfort without compromising on technology. DUAL NOISE SENSOR TECHNOLOGY: Take noise canceling to the next level with Sony’s Integrated Processor V1, so you can fully immerse yourself in the music.",
+		"price": 105.2,
+		"category": "accessories",
+		"attributes": [
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "Sony"
+			},
+			{
+				"name": "color",
+				"displayName": "Color",
+				"value": "Black"
+			},
+			{
+				"name": "earPlacement",
+				"displayName": "Ear Placement",
+				"value": "Over Ear"
+			}
+		],
+		"recommended": false,
+		"discountPrice": 95.2,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 3,
+		"title": "Amazing Book 2nd",
+		"imageUrl": "https://m.media-amazon.com/images/I/81dmHMoJDjL._SL1500_.jpg",
+		"description": "As organizations shift from monolithic applications to smaller, self-contained microservices, distributed systems have become more fine-grained. But developing these new systems brings its own host of problems. This expanded second edition takes a holistic view of topics that you need to consider when building, managing, and scaling microservices architectures.",
+		"price": 29.44,
+		"category": "book",
+		"attributes": [
+			{
+				"name": "featured",
+				"displayName": "Featured",
+				"value": "featured"
+			},
+			{
+				"name": "publisher",
+				"displayName": "Publisher",
+				"value": "O'Reilly"
+			},
+			{
+				"name": "language",
+				"displayName": "Language",
+				"value": "English"
+			},
+			{
+				"name": "sellRank",
+				"displayName": "Best Sellers Rank",
+				"value": "#21,091"
+			},
+			{
+				"name": "isbn10",
+				"displayName": "ISBN-10",
+				"value": "1492034029"
+			},
+			{
+				"name": "isbn13",
+				"displayName": "ISBN-13",
+				"value": "978-1492034025"
+			},
+			{
+				"name": "publishDt",
+				"displayName": "Publication date",
+				"value": "October 5, 2021"
+			}
+		],
+		"recommended": true,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 4,
+		"title": "Heavy Duty Laptop",
+		"imageUrl": "https://m.media-amazon.com/images/I/61RJn0ofUsL._AC_SL1500_.jpg",
+		"description": "Apple 2023 MacBook Pro Laptop M3 Max chip with 14‑core CPU, 30‑core GPU: Built for Apple Intelligence, 14.2-inch Liquid Retina XDR Display, 36GB Unified Memory, 1TB SSD Storage; Space Black.",
+		"price": 3060.52,
+		"category": "laptop",
+		"attributes": [
+			{
+				"name": "featured",
+				"displayName": "Featured",
+				"value": "featured"
+			},
+			{
+				"name": "cpu",
+				"displayName": "CPU Model",
+				"value": "M3"
+			},
+			{
+				"name": "capacity",
+				"displayName": "Hard Disk Size",
+				"value": "1TB"
+			},
+			{
+				"name": "memory",
+				"displayName": "Ram Memory Installed",
+				"value": "36GB"
+			},
+			{
+				"name": "color",
+				"displayName": "Color",
+				"value": "Space Black"
+			},
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "Apple"
+			}
+		],
+		"recommended": false,
+		"discountPrice": 3000.52,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 5,
+		"title": "Smart Home Device",
+		"imageUrl": "https://m.media-amazon.com/images/I/61TuF2ElKgL._AC_SL1000_.jpg",
+		"description": "A sleek smart alarm clock with Alexa and big vibrant sound. Ready to help you wake up, wind down, and so much more. See time, weather, and song titles at a glance, control smart home devices, and more. Personalize your display with your favorite clock face and fun colors. Enjoy rich sound with clear vocals and deep bass. Just ask Alexa to play music, podcasts, and audiobooks. See song titles and touch to control your music.",
+		"price": 54.99,
+		"category": "smart home",
+		"attributes": [
+			{
+				"name": "sound",
+				"displayName": "Sound Quality",
+				"value": "Big Vibrant Sound"
+			},
+			{
+				"name": "screen",
+				"displayName": "Screen Size",
+				"value": "capacity"
+			},
+			{
+				"name": "camera",
+				"displayName": "camera",
+				"value": "No"
+			},
+			{
+				"name": "motionDetection",
+				"displayName": "Motion Detection",
+				"value": "Yes"
+			},
+			{
+				"name": "temperatureSensor",
+				"displayName": "Temperature Sensor",
+				"value": "No"
+			}
+		],
+		"recommended": false,
+		"discountPrice": 50.99,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 6,
+		"title": "Gaming Console",
+		"imageUrl": "https://m.media-amazon.com/images/I/31JaiPXYI8L.jpg",
+		"description": "Playstation 5 Disc Version PS5 Console - 4K-TV Gaming.120Hz 8K Output, 16GB GDDR6, 825GB. SSD, WiFi 6, Bluetooth *5.1.",
+		"price": 475,
+		"category": "gaming",
+		"attributes": [
+			{
+				"name": "asin",
+				"displayName": "ASIN",
+				"value": "B0BMXYPFTK"
+			},
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "Sony"
+			},
+			{
+				"name": "weight",
+				"displayName": "Item Weight",
+				"value": "17.15 pounds"
+			}
+		],
+		"recommended": false,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 7,
+		"title": "Air Purifier",
+		"imageUrl": "https://m.media-amazon.com/images/I/81sg9Om6feL._AC_SL1500_.jpg",
+		"description": "Impressed Purification: The AROEVE MK07 air purifier has a high CADR of 176 CFM / 300 m³/h, equipped with a large intake for efficient removal of tiny particles and pollutants. It covers spaces up to 1395 ft², ensuring your home is consistently filled with fresh air. Smart Sensing, Real Insight: Visual air quality indicators and precision advanced sensors provide an intuitive and precise awareness of tiny particles in your surroundings. With millisecond-level air detection, it accurately measures PM 1 levels, surpassing other products that only detect PM 2.5. Lets you truly sense the freshness and quality of the air. UV protection: Using UV technology provides an additional defense layer, helping to reduce harmful particle in the air and ensuring a safe and healthy environment.",
+		"price": 129.99,
+		"category": "home",
+		"attributes": [
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "AROEVE"
+			},
+			{
+				"name": "color",
+				"displayName": "Color",
+				"value": "White"
+			},
+			{
+				"name": "specification",
+				"displayName": "Specification Met",
+				"value": "ETL Certified"
+			},
+			{
+				"name": "weight",
+				"displayName": "Item Weight",
+				"value": "8.3 Pounds"
+			},
+			{
+				"name": "powerSource",
+				"displayName": "Power Source",
+				"value": "AC"
+			}
+		],
+		"recommended": false,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 8,
+		"title": "Gaming Projector",
+		"imageUrl": "https://m.media-amazon.com/images/I/51iF9NXBN2L._AC_SL1001_.jpg",
+		"description": "BenQ TK700STi 4K HDR Gaming Projector 4K 60Hz 1080p 240Hz 4.16ms Low Latency I 3000lm 100”at 6.5 ft RPG FPS Sport Modes| PS5 Xbox Series X HDMI 2.0b 2D Keystone eARC Golf Simulation.",
+		"price": 1446.99,
+		"category": "gaming",
+		"attributes": [
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "BenQ"
+			},
+			{
+				"name": "connectivity",
+				"displayName": "Connectivity Technology",
+				"value": "USB, HDMI, 3.5mm Jack"
+			},
+			{
+				"name": "resolution",
+				"displayName": "Resolution",
+				"value": "4K UHD (3840×2160)"
+			},
+			{
+				"name": "brightness",
+				"displayName": "Brightness",
+				"value": "3,000 ANSI Lumen"
+			}
+		],
+		"recommended": false,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 9,
+		"title": "Black Myth Speaker",
+		"imageUrl": "https://m.media-amazon.com/images/I/815nga8GBqL._AC_SL1500_.jpg",
+		"description": "This generation of the home line-up has an even wider soundstage than before, delivering immersive Marshall signature sound.Waterproof : No. These speakers are straight to business, so you can just pair and play without the hassle of a complex set-up.",
+		"price": 99.98,
+		"category": "speaker",
+		"attributes": [
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "Marshall"
+			},
+			{
+				"name": "connectivity",
+				"displayName": "Connectivity Technology",
+				"value": "Bluetooth"
+			},
+			{
+				"name": "output",
+				"displayName": "Output Mode",
+				"value": "Stereo"
+			},
+			{
+				"name": "mount",
+				"displayName": "Mounting Type",
+				"value": "Tabletop Mount"
+			}
+		],
+		"recommended": false,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 10,
+		"title": "Comfort Chair",
+		"imageUrl": "https://m.media-amazon.com/images/I/71WvJeaS4PL._AC_SL1500_.jpg",
+		"description": "Most Comfortable And Relaxing: Equipped with headrest and lumbar pillow. When your neck feels sore from gaming or working with head down for a long time, the headrest will relieve your fatigue. When tired from maintaining a same sitting posture, please rest assured to lean back and charge your waist pillow, it will relax your tired waist energetically. More Stable Than Others: Common gaming chairs are equipped with plastic legs generally to save costs, but we still insist on applying the same material as the built-in metal frame. No fear of high or low temperature, no fear of the sunshine, no fear of wind, it will not rust and break. Whether child rolls on the chair or a pet jumps up excitedly, the sturdy metal legs will keep the chair stable firmly. Liberate Your Feet: Will you feel tired for sitting all the time? Sure. Then you can choose the chair with footrest to relax your feet. When you don’t want to straighten your back and sit, just take out the footrest, put your feet up, turn on your favorite music, and start enjoying the comfort! And don’t worry about clean, it is also made of high-quality PU leather, just wipe it with a soft cloth and it will shine as new.",
+		"price": 229.99,
+		"category": "chair",
+		"attributes": [
+			{
+				"name": "material",
+				"displayName": "Material",
+				"value": "Faux Leather"
+			},
+			{
+				"name": "frameMaterial",
+				"displayName": "Frame Material",
+				"value": "Metal"
+			},
+			{
+				"name": "weight",
+				"displayName": "Item Weight",
+				"value": "42 Pounds"
+			},
+			{
+				"name": "ageRange",
+				"displayName": "Age Range (Description)",
+				"value": "Adult"
+			},
+			{
+				"name": "color",
+				"displayName": "Color",
+				"value": "White"
+			},
+			{
+				"name": "brand",
+				"displayName": "Brand",
+				"value": "GTPLAYER"
+			}
+		],
+		"recommended": false,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:19.575Z",
+		"updatedAt": null,
+		"updatedBy": null,
+		"isDeleted": false
+	},
+	{
+		"id": 2,
+		"title": "Smart Watch 2024",
+		"imageUrl": "https://m.media-amazon.com/images/I/81zioALMaAL._AC_SL1500_.jpg",
+		"description": "Apple Watch Ultra 2 [GPS + Cellular 49mm] Smartwatch with Rugged Titanium Case & Blue/Black Trail Loop M/L. Fitness Tracker, Precision GPS, Action Button, Extra-Long Battery Life, Carbon Neutral.",
+		"price": 199.8,
+		"category": "accessories",
+		"attributes": [
+			{
+				"value": "watchOS 11",
+				"displayName": "Operating System",
+				"name": "os"
+			},
+			{
+				"value": "Lithium Ion",
+				"displayName": "Battery Cell Composition",
+				"name": "batteryCell"
+			},
+			{
+				"value": "Built-in GPS",
+				"displayName": "GPS",
+				"name": "gps"
+			},
+			{
+				"value": "49 Millimeters",
+				"displayName": "Screen Size",
+				"name": "screenSize"
+			},
+			{
+				"value": "Apple",
+				"displayName": "Brand",
+				"name": "brand"
+			}
+		],
+		"recommended": true,
+		"discountPrice": null,
+		"createdAt": "2024-09-03T13:58:13.118Z",
+		"updatedAt": "2024-09-03T14:00:30.041Z",
+		"updatedBy": "admin01",
+		"isDeleted": false
+	},
+	{
+		"id": 11,
+		"title": "Daily Carry",
+		"imageUrl": "https://m.media-amazon.com/images/I/81SB43xmS3L._AC_SL1500_.jpg",
+		"description": "Material: This travel backpacks made from high quality nylon fabric. Black polyester lining with soft decompression foam. Backpack Structure Multi Pocket Design: 1 main top U-shaped zipper pocket with 2 open pockets, 1 charging pocket, 2 large zip pocket, 1 17 inch laptop pocket and ipad pocket inside; 1 front medium zip pocket with 2 open pockets and pocket inside; 1 front large flap zipper pocket, 1 bottom shoe compartment; 1 side mesh pocket;1 zipper pocket on the back that hides the backpack strap.",
+		"price": 84.84,
+		"category": "backpack",
+		"attributes": [
+			{
+				"value": "37.9 Liters",
+				"displayName": "Capacity Total",
+				"name": "capacity"
+			},
+			{
+				"value": "Men",
+				"displayName": "Department",
+				"name": "department"
+			},
+			{
+				"value": "3.92 pounds",
+				"displayName": "Item Weight",
+				"name": "weight"
+			}
+		],
+		"recommended": true,
+		"discountPrice": 80,
+		"createdAt": "2024-09-03T16:07:58.002Z",
+		"createdBy": "admin01",
+		"updatedAt": "2024-09-03T16:12:40.080Z",
+		"updatedBy": "admin01",
+		"isDeleted": false
+	}
+]

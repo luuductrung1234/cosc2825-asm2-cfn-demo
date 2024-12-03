@@ -1,0 +1,94 @@
+<%- include('../includes/head.ejs') %>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/custom-bootstrap.css">
+	<link rel="stylesheet" href="/css/forms.css">
+	<link rel="stylesheet" href="/css/cart.css">
+	</head>
+
+	<body>
+		<%- include('../includes/nav.ejs') %>
+			<main class="container">
+				<h1>Your Shopping Cart</h1>
+				<div class="cart">
+					<div class="cart_items">
+						<h2 id="tableDesc">Items</h2>
+						<table class="table align-middle mb-0 bg-white" aria-describedby="tableDesc">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Title</th>
+									<th>Quantity</th>
+									<th>Price</th>
+									<th></th>
+								</tr>
+							</thead>
+							<% if(cart.cartItems.length> 0) { %>
+								<tbody class="table-content">
+									<% for (const [index, cartItem] of cart.cartItems.entries()) { %>
+										<tr>
+											<td>
+												<%= index + 1 %>
+											</td>
+											<td>
+												<div class="d-flex align-items-center">
+													<img class="rounded" src="<%= cartItem.productImageUrl %>" width="60px" alt="product image" />
+													<div class="ms-3">
+														<p class="fw-bold mb-1"><a class="cart__item-link"
+																href="/products/<%= cartItem.productId %>">
+																<%= cartItem.productTitle %>
+															</a></p>
+													</div>
+												</div>
+											</td>
+											<td>
+												<%= cartItem.quantity %>
+											</td>
+											<td><%- include('../includes/product/price.ejs', {price: cartItem.productDiscountPrice !==null &&
+													cartItem.productDiscountPrice !==undefined ? cartItem.productDiscountPrice :
+													cartItem.productPrice, discountPrice: null}) %></td>
+											<td>
+												<form action="/remove-item" method="POST">
+													<input type="hidden" name="productId" value="<%= cartItem.productId %>">
+													<button type="submit" class="btn btn-link-danger btn-rounded btn-sm fw-bold">
+														Delete
+													</button>
+												</form>
+											</td>
+										</tr>
+										<% } %>
+											<tr>
+												<td></td>
+												<td></td>
+												<td>
+													<%= totalQuantity %>
+												</td>
+												<td><%- include('../includes/product/price.ejs', { price: totalAmount, discountPrice: null}) %>
+												</td>
+												<td></td>
+											</tr>
+								</tbody>
+								<% } else { %>
+									<tbody>
+										<tr>
+											<td colspan="5">No item found..</td>
+										</tr>
+										<% } %>
+									</tbody>
+						</table>
+					</div>
+					<form class="cart_actions" action="/checkout" method="GET">
+						<div class="form-action">
+							<% if(cart.cartItems.length> 0) { %>
+								<button style="margin-left: 0;" type="submit" class="my-btn">Checkout</button>
+								<% } else { %>
+									<button style="margin-left: 0;" type="submit" class="my-btn" disabled>Checkout</button>
+									<% } %>
+						</div>
+					</form>
+				</div>
+			</main>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+				crossorigin="anonymous"></script>
+			<%- include('../includes/end.ejs') %>

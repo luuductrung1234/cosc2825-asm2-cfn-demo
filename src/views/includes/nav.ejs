@@ -1,0 +1,44 @@
+<header class="main-header">
+	<nav class="main-header__nav">
+		<ul class="main-header__item-list">
+			<li class="main-header__item">
+				<a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/products' ? 'active' : '' %>" href="/products?pageIndex=0&pageSize=8">Products</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products?pageIndex=0&pageSize=8">Admin
+					Products</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/admin/orders' ? 'active' : '' %>" href="/admin/orders">Admin Orders</a>
+			</li>
+		</ul>
+	</nav>
+
+	<% if (isAuth && username) { %>
+		<div class="main-header__hub">
+			<div class="main-header__hub-item">
+				<span>
+					<%= username %>
+				</span>
+			</div>
+			<div class="main-header__hub-item">
+				<a class="logout-btn" href="/logout">logout</a>
+			</div>
+		</div>
+		<% } else { %>
+			<div class="main-header__hub">
+				<div class="main-header__hub-item">
+					<a class="login-btn" href="/login">login</a>
+				</div>
+			</div>
+			<% } %>
+</header>

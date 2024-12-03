@@ -1,0 +1,17 @@
+<% if(typeof(maxLength) == "undefined") { %>
+<span>
+  <% if (description.length > 100) { %>
+  <%= description.substring(0, 100); %>...
+  <% } else { %>
+  <%= description %>
+  <% }  %>
+</span>
+<% } else { %>
+<span>
+  <% if (description.length > maxLength) { %>
+  <%= description.substring(0, maxLength); %>...
+  <% } else { %>
+  <%= description %>
+  <% }  %>
+</span>
+<% } %>

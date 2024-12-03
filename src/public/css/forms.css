@@ -1,0 +1,94 @@
+hr {
+  border: 1.5px solid #82b5af;
+  border-radius: 3%;
+  width: 80%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.form-container {
+  display: grid;
+  grid-template-areas: "col1 col2";
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding: 20px 250px;
+}
+
+.form-section-col1 {
+  grid-area: "col1";
+}
+
+.form-section-col2 {
+  grid-area: "col2";
+}
+
+.form-title {
+  display: block;
+  text-align: center;
+  color: #00695c;
+}
+
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control-horizontal {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea,
+.form-control select {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control textarea,
+.form-control select {
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border-radius: 2px;
+}
+
+.form-control input:focus,
+.form-control textarea:focus,
+.form-control select:focus {
+  outline-color: #00695c;
+}
+
+.form-control input[type="radio"],
+.form-control-horizontal input[type="radio"] {
+  display: inline-block;
+  width: auto;
+  margin-left: 20px;
+}
+
+.form-blank {
+  display: block;
+  width: 100%;
+  border-radius: 3%;
+  background-color: rgba(39, 41, 43, 0.03);
+  color: #777;
+  margin: auto;
+  width: 20rem;
+  max-width: 90%;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.form-action {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.form-action button {
+  margin-left: auto;
+}

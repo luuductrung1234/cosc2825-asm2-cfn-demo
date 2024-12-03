@@ -1,0 +1,22 @@
+.cart__item-link,
+.cart__item-link:visited {
+  text-decoration: none;
+  font-family: inherit;
+  color: black;
+  cursor: pointer;
+}
+
+.cart__item-link:hover {
+  color: #00695c;
+}
+
+.table-content tr:last-child {
+  height: 70px;
+  font-weight: bold;
+  border-bottom: 0px white none;
+  border-style: none;
+}
+
+.cart_actions {
+  width: 400px;
+}

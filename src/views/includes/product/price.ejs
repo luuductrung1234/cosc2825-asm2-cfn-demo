@@ -1,0 +1,12 @@
+<% if(discountPrice !==undefined && discountPrice !==null) { %>
+	<span class="product__price-origin">
+		$<%= Number(parseFloat(price).toFixed(2)).toLocaleString('en', {minimumFractionDigits: 2}) %>
+	</span>
+	<span class="product__price-discount">
+		$<%= Number(parseFloat(discountPrice).toFixed(2)).toLocaleString('en', {minimumFractionDigits: 2}) %>
+	</span>
+	<% } else { %>
+		<span>
+			$<%= Number(parseFloat(price).toFixed(2)).toLocaleString('en', {minimumFractionDigits: 2}) %>
+		</span>
+		<% } %>

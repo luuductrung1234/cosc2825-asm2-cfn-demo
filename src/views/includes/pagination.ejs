@@ -1,0 +1,63 @@
+<nav class="p-5" aria-label="paging data navigation">
+  <ul class="pagination justify-content-center">
+    <% 
+		const pageSize = previousQuery.pageSize ?? 10;
+		const totalPages = Math.ceil((totalCount ?? 0) / pageSize);
+
+		const currentPage = previousQuery.pageIndex ?? 0;
+		const previousPage = currentPage - 1;
+		const nextPage = currentPage + 1;
+
+		const currentQueryString = Object.keys(previousQuery)
+			.filter(key => key !== "pageSize" && key !== "pageIndex")
+			.map(key => {
+				const value = previousQuery[key];
+				if(!value) return;
+				if(Array.isArray(value))
+					return value.map((v, index) => `${key}[${index}]=${v}`).join('&');
+				return `${key}=${value}`;
+			})
+			.join('&');
+		%>
+
+    <% if(previousPage < 0) { %>
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+    <% } else { %>
+    <li class="page-item">
+      <a class="page-link" href="<%= `?${currentQueryString}&pageIndex=${previousPage}&pageSize=${pageSize}` %>">Previous</a>
+    </li>
+    <% } %>
+
+    <% if(totalPages > 0) { %>
+    <% for (let page = 0; page < totalPages; page++) { %>
+    <% if(page === currentPage) { %>
+    <li class="page-item active" aria-current="page">
+      <span class="page-link"><%= page + 1 %></span>
+    </li>
+    <% } else { %>
+    <li class="page-item">
+      <a class="page-link" href="<%= `?${currentQueryString}&pageIndex=${page}&pageSize=${pageSize}` %>"><%= page + 1 %></a>
+    </li>
+    <% } %>
+    <% } %>
+    <% } else { %>
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">...</span>
+    </li>
+    <% } %>
+
+    <% if(nextPage > (totalPages - 1)) { %>
+    <li class="page-item disabled">
+      <span class="page-link">Next</span>
+    </li>
+    <% } else { %>
+    <li class="page-item">
+      <a class="page-link" href="<%= `?${currentQueryString}&pageIndex=${nextPage}&pageSize=${pageSize}` %>">Next</a>
+    </li>
+    <% } %>
+
+
+  </ul>
+</nav>

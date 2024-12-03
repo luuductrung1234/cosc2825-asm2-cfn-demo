@@ -1,0 +1,52 @@
+<%- include('../includes/head.ejs') %>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/product.css">
+	</head>
+
+	<body>
+		<%- include('../includes/nav.ejs') %>
+			<main class="container">
+				<h1>Welcome to EShop</h1>
+				<h2>Recommend Products</h2>
+				<% if (recommendedProducts.length> 0) { %>
+					<div class="grid">
+						<% for (const product of recommendedProducts) { %>
+							<%- include('../includes/product/product-card.ejs', {product, goTo: '/products' }) %>
+								<% } %>
+					</div>
+					<% } else { %>
+						<div class="product-blank">
+							<p>No product found...</p>
+						</div>
+						<% } %>
+							<br>
+							<br>
+							<h2>Featured Products</h2>
+							<% if (featuredProducts.length> 0) { %>
+								<div class="grid">
+									<% for (const product of featuredProducts) { %>
+										<%- include('../includes/product/product-card.ejs', {product, goTo: '/products' }) %>
+											<% } %>
+								</div>
+								<% } else { %>
+									<div class="product-blank">
+										<p>No product found...</p>
+									</div>
+									<% } %>
+										<br>
+										<br>
+										<h2>Today Discount</h2>
+										<% if (discountProducts.length> 0) { %>
+											<div class="grid">
+												<% for (const product of discountProducts) { %>
+													<%- include('../includes/product/product-card.ejs', {product, goTo: '/products' }) %>
+														<% } %>
+											</div>
+											<% } else { %>
+												<div class="product-blank">
+													<p>No product found...</p>
+												</div>
+												<% } %>
+			</main>
+			<%- include('../includes/end.ejs') %>

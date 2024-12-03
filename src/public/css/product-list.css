@@ -1,0 +1,12 @@
+.product__col-title {
+  position: relative;
+}
+
+i.product__delete-mark {
+  background-color: rgb(224, 26, 79);
+  color: #eee;
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}

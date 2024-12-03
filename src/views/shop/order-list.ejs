@@ -1,0 +1,60 @@
+<%- include('../includes/head.ejs') %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/custom-bootstrap.css">
+<link rel="stylesheet" href="/css/order.css">
+</head>
+
+<body>
+  <%- include('../includes/nav.ejs') %>
+  <main class="container">
+    <h1>Orders</h1>
+    <h3 id="tableDesc">List of all the orders...</h3>
+    <table class="table table-striped table-bordered table-hover align-middle mb-0 bg-white" aria-describedby="tableDesc">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th class="w-25">Order Number</th>
+          <th>Total Amount</th>
+          <th>Date</th>
+          <th class="text-center">Status</th>
+          <th>Receive At</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (orders.length> 0) { %>
+        <% for (const [index, order] of orders.entries()) { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><a class="order-link" href="/orders/<%= order.id %>"><%= order.orderNumber %></a></td>
+          <td><%- include('../includes/order/amount.ejs', {amount: order.totalAmount}) %></td>
+          <td><%= order.createdAt.toLocaleString() %></td>
+          <td class="text-center"><%- include('../includes/order/status.ejs', {status: order.status}) %></td>
+          <td><%= order.shippingAddress %></td>
+          <td class="text-center">
+            <div class="d-flex justify-content-center">
+              <form action="/cancel-order/<%= order.id %>" method="POST">
+                <% if(order.status !== 'new') { %>
+                <button type="submit" class="btn btn-link btn-rounded btn-sm fw-bold" disabled>
+                  Cancel
+                </button>
+                <% } else { %>
+                <button type="submit" class="btn btn-link btn-rounded btn-sm fw-bold">
+                  Cancel
+                </button>
+                <% } %>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <% } %>
+        <% } else { %>
+        <tr>
+          <td colspan="6">No order found..</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <%- include('../includes/end.ejs') %>

@@ -1,0 +1,35 @@
+<article class="card product-item">
+	<header class="card__header">
+		<h1 class="product__title">
+			<a class="product__title-link" href="/products/<%= product.id %>">
+				<%= product.title %>
+			</a>
+		</h1>
+	</header>
+	<div class="card__image">
+		<img src="<%= product.imageUrl %>" alt="product front">
+	</div>
+	<div class="card__content">
+		<div class="product__attribute-list">
+			<% for(const [index, attributeValue] of product.attributes.filter(a=> !a.isDeleted).slice(0, 3).entries() ) {
+				%>
+				<span class="product__attribute">
+					<% if(attributeValue.value.toString().length> 10) { %>
+						<%= attributeValue.value.toString().substring(0, 10);%>...
+							<% } else { %>
+								<%= attributeValue.value %>
+									<% } %>
+				</span>
+				<% } %>
+		</div>
+		<h2 class="product__price"><%- include('price.ejs', {price: product.price, discountPrice: product.discountPrice}) %>
+		</h2>
+		<p class="product__description"><%- include('description.ejs', {description: product.description}) %></p>
+	</div>
+	<div class="card__actions">
+		<form action="/products/<%= product.id %>" method="GET">
+			<button class="my-btn" type="submit">Details</button>
+		</form>
+		<%- include('add-to-card.ejs', {product, goTo}) %>
+	</div>
+</article>

@@ -1,0 +1,286 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+}
+
+main {
+  padding: 1rem;
+  flex: 1;
+}
+
+.main-header {
+  width: 100%;
+  height: 3.5rem;
+  background-color: #00695c;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-header__nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-header__item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.main-header__item {
+  margin: 0 1rem;
+  padding: 0;
+}
+
+.main-header__item a {
+  text-decoration: none;
+  color: white;
+}
+
+.main-header__item a:hover,
+.main-header__item a:active,
+.main-header__item a.active {
+  color: #ffeb3b;
+}
+
+.main-header__hub {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-header__hub-item {
+  margin: 0 0.3rem;
+  padding: 0;
+}
+
+.main-header__hub-item span {
+  color: white;
+}
+
+.logout-btn {
+  padding: 5px 7px;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid white;
+  text-decoration: none;
+}
+
+.logout-btn:hover,
+.logout-btn:active,
+.logout-btn.active {
+  color: white;
+  border: 1px solid #ff3b3b;
+  background-color: #ff3b3b;
+}
+
+.login-btn {
+  padding: 5px 7px;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid white;
+  text-decoration: none;
+}
+
+.login-btn:hover,
+.login-btn:active,
+.login-btn.active {
+  color: black;
+  border: 1px solid #ffeb3b;
+  background-color: #ffeb3b;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.card__header,
+.card__content {
+  padding: 1rem;
+}
+
+.card__header h1,
+.card__content h1,
+.card__content h2,
+.card__content p {
+  margin: 0;
+}
+
+.card__image {
+  width: 100%;
+}
+
+.card__image img {
+  /* width: 100%; */
+  height: 180px;
+  display: block;
+  margin: auto;
+}
+
+.card__actions {
+  padding: 1rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.card__actions button,
+.card__actions a {
+  margin: 0 0.5rem;
+}
+
+.btn,
+.my-btn {
+  font: inherit;
+  border: 1px solid #00695c;
+  color: #00695c;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:active,
+.my-btn:enabled:hover,
+.my-btn:enabled:active {
+  background-color: #00695c;
+  color: white;
+}
+
+.my-btn:disabled {
+  color: #9e9e9e;
+}
+
+.footer {
+  background-color: #eee; /* Style the footer */
+  color: #333;
+  text-align: center;
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.footer a {
+  color: #4e4e4e;
+  text-decoration: none;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: "logo  nav1  nav2  nav3  nav4" "jaguar  jaguar  jaguar  jaguar  jaguar";
+  grid-template-columns: minmax(260px, 2fr) repeat(4, minmax(0, 1fr));
+}
+
+.footer-logo-col {
+  grid-area: logo;
+  text-align: left;
+}
+
+.footer-nav-col-1 {
+  grid-area: nav1;
+}
+
+.footer-nav-col-2 {
+  grid-area: nav2;
+}
+
+.footer-jaguar {
+  grid-area: jaguar;
+  align-items: center;
+  border-top: 1px solid #cdcdcd;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2rem;
+  padding-top: 1.5rem;
+}
+
+.footer-logo-text {
+  background: #4e4e4e;
+  color: #eee;
+  font-size: 24px;
+  padding: 0px 5px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.footer-copyright {
+  font-size: 14x;
+}
+
+.footer-nav-heading {
+  font-size: 16px;
+  margin: 0 0 0.5rem;
+}
+
+.footer-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+ul.footer-nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-nav-item {
+  font-size: var(--type-smaller-font-size);
+}
+
+li.footer-nav-item {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+ul.social-icons {
+  list-style: none;
+  padding: 0;
+}
+
+.icon {
+  background-color: #696969;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.social-icons .icon {
+  display: block;
+  height: 21px;
+  width: 21px;
+}
+
+.icon.icon-github-mark-small {
+  -webkit-mask-image: url(/images/github-mark-small.svg);
+  mask-image: url(/images/github-mark-small.svg);
+}

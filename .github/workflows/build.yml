@@ -1,0 +1,68 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 20.x
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Verify Code Changed
+        id: verify-changed-code
+        uses: tj-actions/changed-files@v23.1
+        with:
+          files: |
+            .github/**
+            **/package.json
+            src
+            src/**
+            src/**/*.sql
+            src/**/*.yml
+            src/**/*.js
+            src/**/*.html
+            src/**/*.css
+            src/**/*.json
+
+      - name: List All Changed Files
+        if: steps.verify-changed-code.outputs.any_changed == 'true'
+        run: |
+          for file in ${{ steps.verify-changed-code.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - run: npm ci
+      - run: npm run build --if-present
+
+      - name: Archive Release
+        if: steps.verify-changed-code.outputs.any_changed == 'true'
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: "zip"
+          filename: "release.zip"
+          exclusions: "*.git* /*node_modules/* .editorconfig"
+      - name: Upload Release
+        if: steps.verify-changed-code.outputs.any_changed == 'true'
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.zip"
+          token: ${{ secrets.GITHUB }}
+          allowUpdates: true
+          makeLatest: true
+          tag: pre.${{ github.run_number }}

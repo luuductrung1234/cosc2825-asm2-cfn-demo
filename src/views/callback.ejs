@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Callback page</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<section data-role="wrapper">
+		<header data-role="page_header">
+			<h1>Logging you in. 1 sec...</h1>
+	</section>
+	<script>
+		var id_token_str = window.location.hash.split("&access_token=")[0];
+		var bearer_str = id_token_str.replace("#id_token=", "");
+		window.localStorage.setItem("bearer_str", bearer_str);
+		window.location = "/callback?test=1&access_token=" + bearer_str;
+	</script>
+</body>
+
+</html>

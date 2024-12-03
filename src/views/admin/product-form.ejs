@@ -1,0 +1,168 @@
+<%- include('../includes/head.ejs') %>
+	<link rel="stylesheet" href="/css/forms.css">
+	<link rel="stylesheet" href="/css/product.css">
+	</head>
+
+	<body>
+		<%- include('../includes/nav.ejs') %>
+			<main>
+				<% if(!edit) { %>
+					<form class="form-container" action="/admin/add-product" method="POST">
+						<section class="form-section product-form">
+							<div class="form-control">
+								<label for="title">Title</label>
+								<input type="text" name="title" id="title" value="<%= product.title %>">
+							</div>
+							<div class="form-control">
+								<label for="category">Category</label>
+								<input type="text" name="category" id="category" value="<%= product.category %>">
+							</div>
+							<div class="form-control">
+								<label for="imageUrl">Image URL</label>
+								<input type="text" name="imageUrl" id="imageUrl" value="<%= product.imageUrl %>">
+							</div>
+							<div class="form-control">
+								<label for="price">Price</label>
+								<input type="number" name="price" id="price" step="0.01" value="<%= product.price %>">
+							</div>
+							<div class="form-control">
+								<label for="price">Discount Price</label>
+								<input type="number" name="discountPrice" id="discountPrice" step="0.01"
+									value="<%= product.discountPrice %>">
+							</div>
+							<div class="form-control">
+								<label for="description">Description</label>
+								<textarea name="description" id="description" rows="5"><%= product.description %></textarea>
+							</div>
+							<div class="form-control-horizontal">
+								<label for="price">Recommend</label>
+								<input type="checkbox" name="recommended" id="recommended" value="<%= product.recommended %>">
+							</div>
+
+							<div class="form-action">
+								<button class="btn" type="submit">Add Product</button>
+							</div>
+						</section>
+						<section class="form-section product-form" id="generatedAttributeForm" data-index="0">
+							<button class="add-attribute-btn" id="addAttributeBtn">+ add attribute </button>
+							<h2 class="form-title">Extra Attributes</h2>
+						</section>
+					</form>
+					<% } else { %>
+						<form class="form-container" action="<%= `/admin/edit-product/${product.id}` %>" method="POST">
+							<section class="form-section product-form">
+								<h2 class="form-title">General</h2>
+								<div class="form-control">
+									<label for="title">Title</label>
+									<input type="text" name="title" id="title" value="<%= product.title %>">
+								</div>
+								<div class="form-control">
+									<label for="category">Category</label>
+									<input type="text" name="category" id="category" value="<%= product.category %>">
+								</div>
+								<div class="form-control">
+									<label for="imageUrl">Image URL</label>
+									<input type="text" name="imageUrl" id="imageUrl" value="<%= product.imageUrl %>">
+								</div>
+								<div class="form-control">
+									<label for="price">Price</label>
+									<input type="number" name="price" id="price" step="0.01" value="<%= product.price %>">
+								</div>
+								<div class="form-control">
+									<label for="price">Discount Price</label>
+									<input type="number" name="discountPrice" id="discountPrice" step="0.01"
+										value="<%= product.discountPrice %>">
+								</div>
+								<div class="form-control">
+									<label for="description">Description</label>
+									<textarea name="description" id="description" rows="5"><%= product.description %></textarea>
+								</div>
+								<div class="form-control-horizontal">
+									<label for="price">Recommend</label>
+									<input type="checkbox" name="recommended" id="recommended" <%=product.recommended ? "checked" : "" %>>
+								</div>
+							</section>
+							<section class="form-section product-form">
+								<h2 class="form-title">Extra Attributes</h2>
+								<% if(product.attributes?.length> 0) { %>
+									<% for (const [index, attribute] of product.attributes.entries()) { %>
+										<div class="form-control">
+											<label for="attributeValues[<%= index %>][value]">
+												<%= attribute.displayName %>
+											</label>
+											<input type="text" name="attributeValues[<%= index %>][value]" value="<%= attribute.value %>"
+												<%=attribute.isRequired ? "required" : "" %>>
+											<input type="hidden" name="attributeValues[<%= index %>][displayName]"
+												value="<%= attribute.displayName %>">
+											<input type="hidden" name="attributeValues[<%= index %>][name]" value="<%= attribute.name %>">
+										</div>
+										<% } %>
+											<% } else { %>
+												<div class="form-blank">
+													<p>No Extra Attribute</p>
+												</div>
+												<% } %>
+													<div class="form-action">
+														<button class="btn" type="submit">Edit Product</button>
+													</div>
+							</section>
+						</form>
+						<% } %>
+			</main>
+			<script>
+				const formContainer = document.getElementById("generatedAttributeForm");
+
+				document.getElementById("addAttributeBtn").addEventListener("click", (e) => {
+					const index = formContainer.dataset.index || 0;
+					formContainer.dataset.index++;
+
+					let attributeGroup = document.createElement("div");
+					attributeGroup.classList.add("attribute-group");
+
+					let nameControl = document.createElement("div");
+					nameControl.classList.add("form-control");
+					let nameLabel = document.createElement("label");
+					nameLabel.htmlFor = `attributeValues[${index}][name]`;
+					nameLabel.innerText = "Name"
+					let nameInput = document.createElement("input");
+					nameInput.type = "text";
+					nameInput.name = `attributeValues[${index}][name]`;
+					nameControl.appendChild(nameLabel);
+					nameControl.appendChild(nameInput);
+
+					let displayNameControl = document.createElement("div");
+					displayNameControl.classList.add("form-control");
+					let displayNameLabel = document.createElement("label");
+					displayNameLabel.htmlFor = `attributeValues[${index}][displayName]`;
+					displayNameLabel.innerText = "Display Name"
+					let displayNameInput = document.createElement("input");
+					displayNameInput.type = "text";
+					displayNameInput.name = `attributeValues[${index}][displayName]`;
+					displayNameControl.appendChild(displayNameLabel);
+					displayNameControl.appendChild(displayNameInput);
+
+
+					let valueControl = document.createElement("div");
+					valueControl.classList.add("form-control");
+					let valueLabel = document.createElement("label");
+					valueControl.htmlFor = `attributeValues[${index}][value]`;
+					valueControl.innerText = "Value"
+					let valueInput = document.createElement("input");
+					valueInput.type = "text";
+					valueInput.name = `attributeValues[${index}][value]`;
+					valueControl.appendChild(valueLabel);
+					valueControl.appendChild(valueInput);
+
+					let divider = document.createElement("hr");
+
+					attributeGroup.appendChild(nameControl);
+					attributeGroup.appendChild(displayNameControl);
+					attributeGroup.appendChild(valueControl);
+					attributeGroup.appendChild(divider);
+
+					formContainer.appendChild(attributeGroup);
+
+					e.preventDefault();
+				});
+			</script>
+			<%- include('../includes/end.ejs') %>

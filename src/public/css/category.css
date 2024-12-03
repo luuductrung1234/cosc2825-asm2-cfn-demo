@@ -1,0 +1,53 @@
+.category-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  position: relative;
+}
+
+.add-attribute-btn {
+  color: #00695c;
+  border: none;
+  background: none;
+}
+
+.add-attribute-btn:hover,
+.add-attribute-btn:active,
+.my-btn:enabled:hover,
+.my-btn:enabled:active {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.attribute {
+  position: relative;
+}
+
+.attribute-status {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background-color: #198754;
+  color: #eee;
+  padding: 2px 7px;
+  border: none;
+  border-radius: 8%;
+}
+
+.attribute-status-deleted {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background-color: #dc3545;
+  color: #eee;
+  padding: 2px 7px;
+  border: none;
+  border-radius: 8%;
+}
+
+.delete-attribute,
+.reactive-attribute {
+  position: absolute;
+  bottom: 27.8px;
+  left: 140px;
+}

@@ -1,0 +1,11 @@
+.order-link,
+.order-link:visited {
+  text-decoration: none;
+  font-family: inherit;
+  color: black;
+  cursor: pointer;
+}
+
+.order-link:hover {
+  color: #00695c;
+}

@@ -28,20 +28,17 @@ jobs:
         id: verify-changed-code
         uses: tj-actions/changed-files@v45
         with:
-          files_yaml: |
-            github:
-              - .github/**
-            npm:
-              - '**/package.json'
-            src:
-              - src
-              - 'src/**'
-              - 'src/**/*.sql'
-              - 'src/**/*.yml'
-              - 'src/**/*.js'
-              - 'src/**/*.html'
-              - 'src/**/*.css'
-              - 'src/**/*.json'
+          files: |
+            .github/**
+            '**/package.json'
+            src
+            'src/**'
+            'src/**/*.sql'
+            'src/**/*.yml'
+            'src/**/*.js'
+            'src/**/*.html'
+            'src/**/*.css'
+            'src/**/*.json'
 
       - name: List All Changed Files
         if: steps.verify-changed-code.outputs.any_changed == 'true'

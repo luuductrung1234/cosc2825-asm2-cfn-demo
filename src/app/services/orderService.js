@@ -2,8 +2,8 @@ const NotFoundError = require("../../app/errors/NotFoundError");
 const BadRequestError = require("../../app/errors/BadRequestError");
 const { sum } = require("../../utils/utils");
 
-const productRepository = require("../../infra/repositories/fileProductRepository");
-const orderRepository = require("../../infra/repositories/fileOrderRepository");
+const productRepository = require("../../infra/repositories/sequelizeProductRepository");
+const orderRepository = require("../../infra/repositories/sequelizeOrderRepository");
 const models = require("../models");
 
 const listOrders = async (query) => {
@@ -63,21 +63,12 @@ const findById = async (id) => {
   };
 };
 
+/**
+ * @param {import("../dto").CreateOrderDto} createOrderDto
+ * @param {string} createdBy
+ */
 const addOrder = async (createOrderDto, createdBy) => {
-  let orderItems = [];
-  for (const item of createOrderDto.orderItems) {
-    const product = await productRepository.findById(item.productId);
-    orderItems.push({
-      productId: item.productId,
-      quantity: item.quantity,
-      price:
-        product.discountPrice !== undefined && product.discountPrice !== null
-          ? product.discountPrice
-          : product.price,
-    });
-  }
-
-  const order = await orderRepository.saveOrder(
+  const order = await orderRepository.addOrder(
     new models.Order(
       null,
       createOrderDto.customerId,
@@ -85,11 +76,24 @@ const addOrder = async (createOrderDto, createdBy) => {
       createOrderDto.customerEmail,
       createOrderDto.customerPhone,
       createOrderDto.shippingAddress,
-      orderItems,
       models.OrderStatus.New,
       createdBy
     )
   );
+
+  for (const item of createOrderDto.orderItems) {
+    const product = await productRepository.findById(item.productId);
+    await orderRepository.addOrderItem(
+      new models.OrderItem(
+        order.id,
+        item.productId,
+        item.quantity,
+        product.discountPrice !== undefined && product.discountPrice !== null
+          ? product.discountPrice
+          : product.price
+      )
+    );
+  }
 
   return order;
 };
@@ -99,7 +103,9 @@ const completeOrder = async (id, completedBy) => {
   if (!orderInDb) throw new NotFoundError(`Not found order with id ${id}`);
   if (orderInDb.status !== models.OrderStatus.New)
     throw new BadRequestError(`Order ${id} is not allowed to complete.`);
-  orderInDb.complete(completedBy);
+  orderInDb.status = models.OrderStatus.Completed;
+  orderInDb.updatedAt = new Date();
+  orderInDb.updatedBy = completedBy;
   return await orderRepository.saveOrder(orderInDb);
 };
 
@@ -108,7 +114,9 @@ const cancelOrder = async (id, cancelledBy) => {
   if (!orderInDb) throw new NotFoundError(`Not found order with id ${id}`);
   if (orderInDb.status !== models.OrderStatus.New)
     throw new BadRequestError(`Order ${id} is not allowed to cancel.`);
-  orderInDb.cancel(cancelledBy);
+  orderInDb.status = models.OrderStatus.Cancelled;
+  orderInDb.updatedAt = new Date();
+  orderInDb.updatedBy = cancelledBy;
   return await orderRepository.saveOrder(orderInDb);
 };
 

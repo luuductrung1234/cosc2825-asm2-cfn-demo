@@ -21,7 +21,7 @@ class CreateProductDto extends BaseDto {
             Joi.object({
               name: Joi.string().required(),
               displayName: Joi.string().required(),
-              value: Joi.any().empty("").default(null).optional(),
+              value: Joi.string().empty("").default(null).optional(),
             })
           )
           .optional()

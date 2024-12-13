@@ -1,4 +1,4 @@
-const productRepository = require("../../infra/repositories/fileProductRepository");
+const productRepository = require("../../infra/repositories/sequelizeProductRepository");
 
 const listProducts = async (query) => {
   const { products, totalCount } = await productRepository.listProducts({

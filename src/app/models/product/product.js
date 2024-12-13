@@ -1,12 +1,10 @@
 class Product {
   /**
-   * @param {number} id
    * @param {string} title
    * @param {string} imageUrl
    * @param {string} description
    * @param {number} price
    * @param {string} category
-   * @param {object[]} attributes
    * @param {boolean} recommended
    * @param {number} discountPrice
    * @param {string} createdBy
@@ -15,13 +13,11 @@ class Product {
    * @param {Date} updatedAt
    */
   constructor(
-    id,
     title,
     imageUrl,
     description,
     price,
     category,
-    attributes,
     recommended,
     discountPrice,
     createdBy,
@@ -29,31 +25,20 @@ class Product {
     updatedBy,
     updatedAt
   ) {
-    this.id = id;
+    this.id = null;
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
     this.price = price;
     this.category = category;
-    this.attributes = attributes;
     this.recommended = recommended;
     this.discountPrice = discountPrice;
-    this.createdAt = createdAt || new Date();
+    this.createdAt = createdAt || null;
     this.createdBy = createdBy;
     this.updatedAt = updatedAt || null;
     this.updatedBy = updatedBy || null;
     this.isDeleted = false;
   }
-
-  /**
-   * @param {string} deletedBy
-   * @type {(updatedBy: string) => void}
-   */
-  delete = (deletedBy) => {
-    this.isDeleted = true;
-    this.updatedAt = deletedBy;
-    this.updatedBy = new Date();
-  };
 
   static getAttributes = () => Object.keys(new Product());
 
@@ -67,13 +52,11 @@ class Product {
     return JSON.parse(value).map(
       (p) =>
         new Product(
-          p.id,
           p.title,
           p.imageUrl,
           p.description,
           p.price,
           p.category,
-          p.attributes,
           p.recommended,
           p.discountPrice,
           p.createdBy,

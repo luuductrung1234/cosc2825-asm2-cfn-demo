@@ -32,16 +32,16 @@ jobs:
             github:
               - .github/**
             npm:
-              - **/package.json
+              - '**/package.json'
             src:
               - src
-              - src/**
-              - src/**/*.sql
-              - src/**/*.yml
-              - src/**/*.js
-              - src/**/*.html
-              - src/**/*.css
-              - src/**/*.json
+              - 'src/**'
+              - 'src/**/*.sql'
+              - 'src/**/*.yml'
+              - 'src/**/*.js'
+              - 'src/**/*.html'
+              - 'src/**/*.css'
+              - 'src/**/*.json'
 
       - name: List All Changed Files
         if: steps.verify-changed-code.outputs.any_changed == 'true'

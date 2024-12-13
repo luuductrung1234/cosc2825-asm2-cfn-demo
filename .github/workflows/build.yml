@@ -26,24 +26,29 @@ jobs:
 
       - name: Verify Code Changed
         id: verify-changed-code
-        uses: tj-actions/changed-files@v23.1
+        uses: tj-actions/changed-files@v45
         with:
-          files: |
-            .github/**
-            **/package.json
-            src
-            src/**
-            src/**/*.sql
-            src/**/*.yml
-            src/**/*.js
-            src/**/*.html
-            src/**/*.css
-            src/**/*.json
+          files_yaml: |
+            github:
+              - .github/**
+            npm:
+              - **/package.json
+            src:
+              - src
+              - src/**
+              - src/**/*.sql
+              - src/**/*.yml
+              - src/**/*.js
+              - src/**/*.html
+              - src/**/*.css
+              - src/**/*.json
 
       - name: List All Changed Files
         if: steps.verify-changed-code.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.verify-changed-code.outputs.all_changed_files }}
         run: |
-          for file in ${{ steps.verify-changed-code.outputs.all_changed_files }}; do
+          for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
           done
 
@@ -57,6 +62,7 @@ jobs:
           type: "zip"
           filename: "release.zip"
           exclusions: "*.git* /*node_modules/* .editorconfig"
+
       - name: Upload Release
         if: steps.verify-changed-code.outputs.any_changed == 'true'
         uses: ncipollo/release-action@v1

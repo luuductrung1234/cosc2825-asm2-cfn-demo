@@ -10,6 +10,11 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
 const rootDir = require("./utils/path");
+const { callerCheck } = require("./infra/connectors/awsConnector");
+const {
+  connectToMySqlServer,
+} = require("./infra/connectors/sequelizeConnector");
+const { autoMigration } = require("./infra/umzug");
 const route = require("./routes");
 const { auth } = require("./middlewares/authMiddleware");
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
@@ -26,34 +31,40 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
 app.use(express.static(path.join(rootDir, "public")));
 
-app.use(auth);
+callerCheck().then(() => {
+  connectToMySqlServer().then(() => {
+    autoMigration().then(() => {
+      app.use(auth);
 
-route(app);
+      route(app);
 
-app.use(globalErrorHandler);
+      app.use(globalErrorHandler);
 
-//const server = http.createServer(app);
-//server.listen(3000);
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Server running on port ${process.env.APP_PORT}`);
-});
+      //const server = http.createServer(app);
+      //server.listen(3000);
+      app.listen(process.env.APP_PORT, () => {
+        console.log(`Server running on port ${process.env.APP_PORT}`);
+      });
 
-const redirectApp = express();
+      const redirectApp = express();
 
-var options = {
-  key: fs.readFileSync(path.join(rootDir, "server.key")),
-  cert: fs.readFileSync(path.join(rootDir, "server.cert")),
-};
+      var options = {
+        key: fs.readFileSync(path.join(rootDir, "server.key")),
+        cert: fs.readFileSync(path.join(rootDir, "server.cert")),
+      };
 
-redirectApp.get("*", function (req, res, next) {
-  if (req.protocol === "https") {
-    return res.redirect(
-      "http://" + req.headers.host + ":" + process.env.APP_PORT + req.path
-    );
-  }
-  next();
-});
+      redirectApp.get("*", function (req, res, next) {
+        if (req.protocol === "https") {
+          return res.redirect(
+            "http://" + req.headers.host + ":" + process.env.APP_PORT + req.path
+          );
+        }
+        next();
+      });
 
-https.createServer(options, redirectApp).listen(443, () => {
-  console.log(`Server running on port 443`);
+      https.createServer(options, redirectApp).listen(443, () => {
+        console.log(`Server running on port 443`);
+      });
+    });
+  });
 });

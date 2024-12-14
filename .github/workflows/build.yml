@@ -58,7 +58,7 @@ jobs:
         with:
           type: "zip"
           filename: "release.zip"
-          exclusions: "*.git* .editorconfig"
+          exclusions: "*.git* /*node_modules/* .editorconfig"
 
       - name: Upload Release
         uses: ncipollo/release-action@v1

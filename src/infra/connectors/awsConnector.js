@@ -1,8 +1,5 @@
 const { STSClient, GetCallerIdentityCommand } = require("@aws-sdk/client-sts");
-const {
-  GetSecretValueCommand,
-  SecretsManagerClient,
-} = require("@aws-sdk/client-secrets-manager");
+const { SSMClient, GetParameterCommand } = require("@aws-sdk/client-ssm");
 
 var _localOnlySecrets = {
   "/shop/userPoolId": process.env.LOCAL_ONLY_COGNITO_USER_POOL_ID,
@@ -17,7 +14,25 @@ var _localOnlySecrets = {
   "/shop/dbPassword": process.DB_PASSWORD_SECRET_NAME,
 };
 
-module.exports.callerCheck = async () => {
+var _remoteSecrets = {};
+
+module.exports.loadSecrets = async () => {
+  await callerCheck();
+
+  for (var key in _localOnlySecrets) {
+    console.log("Load secret value with key: ", key);
+    _remoteSecrets[key] = await resolveSecretValue(key);
+  }
+
+  console.log("Successfully load all secrets.");
+};
+
+module.exports.getSecretValue = (secretName) => {
+  if (process.env.NODE_ENV === "local") return _localOnlySecrets[secretName];
+  return _remoteSecrets[secretName];
+};
+
+const callerCheck = async () => {
   const client = new STSClient({
     region: process.env.REGION_STR,
   });
@@ -28,23 +43,22 @@ module.exports.callerCheck = async () => {
   );
 };
 
-module.exports.getSecretValue = async (secretName) => {
+const resolveSecretValue = async (secretName) => {
   if (process.env.NODE_ENV === "local") return _localOnlySecrets[secretName];
 
-  const client = new SecretsManagerClient({
+  const client = new SSMClient({
     region: process.env.REGION_STR,
   });
   const response = await client.send(
-    new GetSecretValueCommand({
-      SecretId: secretName,
+    new GetParameterCommand({
+      Name: secretName,
+      WithDecryption: true,
     })
   );
 
-  if (response.SecretString) {
-    return response.SecretString;
-  }
-
-  if (response.SecretBinary) {
-    return response.SecretBinary;
-  }
+  console.log(
+    "Retrieved secret value from SSM Pamaeter Store: ",
+    response.Parameter.ARN
+  );
+  return response.Parameter.Value;
 };

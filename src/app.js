@@ -10,28 +10,29 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
 const rootDir = require("./utils/path");
-const { callerCheck } = require("./infra/connectors/awsConnector");
-const {
-  connectToMySqlServer,
-} = require("./infra/connectors/sequelizeConnector");
-const { autoMigration } = require("./infra/umzug");
-const route = require("./routes");
-const { auth } = require("./middlewares/authMiddleware");
-const globalErrorHandler = require("./middlewares/globalErrorHandler");
+const { loadSecrets } = require("./infra/connectors/awsConnector");
 
-const app = express();
-app.use(cors({ credentials: true, origin: true }));
+loadSecrets().then(() => {
+  const {
+    connectToMySqlServer,
+  } = require("./infra/connectors/sequelizeConnector");
+  const { autoMigration } = require("./infra/umzug");
+  const route = require("./routes");
+  const { auth } = require("./middlewares/authMiddleware");
+  const globalErrorHandler = require("./middlewares/globalErrorHandler");
 
-app.set("views", path.join(rootDir, "views"));
-app.set("view engine", "ejs");
+  const app = express();
+  app.use(cors({ credentials: true, origin: true }));
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan("combined"));
-app.use(express.static(path.join(rootDir, "public")));
+  app.set("views", path.join(rootDir, "views"));
+  app.set("view engine", "ejs");
 
-callerCheck().then(() => {
+  app.use(cookieParser());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(morgan("combined"));
+  app.use(express.static(path.join(rootDir, "public")));
+
   connectToMySqlServer().then(() => {
     autoMigration().then(() => {
       app.use(auth);

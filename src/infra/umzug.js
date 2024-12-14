@@ -4,7 +4,7 @@ const path = require("node:path");
 const { Umzug, SequelizeStorage, MigrationError } = require("umzug");
 const { Sequelize } = require("sequelize");
 
-const { db } = require("./configs/sequelizeConfig");
+const { db } = require("./connectors/sequelizeConnector");
 const appConfig = require("../app/configs/appConfig");
 const rootDir = require("../utils/path");
 

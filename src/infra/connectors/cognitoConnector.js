@@ -8,7 +8,7 @@ let cognitoExpressSession;
 
 module.exports.cognitoExpressSession = async () => {
   if (!cognitoExpressSession) {
-    const userPoolId = await getSecretValue(
+    const userPoolId = getSecretValue(
       process.env.COGNITO_USER_POOL_ID_SECRET_NAME
     );
 

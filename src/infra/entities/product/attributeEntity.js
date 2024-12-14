@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const { db } = require("../../configs/sequelizeConfig");
+const { db } = require("../../connectors/sequelizeConnector");
 
 const productEntity = require("./productEntity");
 

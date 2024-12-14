@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const { db } = require("../../configs/sequelizeConfig");
+const { db } = require("../../connectors/sequelizeConnector");
 
 /**
  * @see https://sequelize.org/docs/v6/core-concepts/model-basics/

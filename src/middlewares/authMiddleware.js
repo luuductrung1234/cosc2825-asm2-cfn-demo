@@ -50,8 +50,9 @@ const auth = async (req, res, next) => {
       return;
     }
 
-    const session = await cognitoExpressSession();
-    const response = await session.validate(token);
+    // const session = await cognitoExpressSession();
+    // const response = await session.validate(token);
+    let response = jwt.decode(token);
     req.auth.userId = response.sub;
     req.auth.username = response["email"];
     req.auth.groups = response["cognito:groups"] || [];

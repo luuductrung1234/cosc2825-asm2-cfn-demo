@@ -10,10 +10,14 @@ const dbContext = require("../entities");
  * 	=> Promise<import("sequelize").Model<any, any>>[]>}
  */
 const listOrders = async (query) => {
+  let where = {};
+
+  if (query.customerId !== undefined && query.customerId !== null) {
+    where.customerId = query.customerId;
+  }
+
   return await dbContext.orders.findAll({
-    where: {
-      customerId: query.customerId,
-    },
+    where: where,
     include: [
       {
         model: dbContext.orderItems,

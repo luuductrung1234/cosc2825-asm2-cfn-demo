@@ -97,11 +97,11 @@ const listProducts = async (query) => {
  * @type {(id: number) => Promise<import("sequelize").Model<any, any>>}
  */
 const findById = async (id) => {
-  return await models.Product.findByPk(id, {
+  return await dbContext.products.findByPk(id, {
     attributes: models.Product.getAttributes(),
     include: [
       {
-        model: models.Attribute,
+        model: dbContext.attributes,
         as: "attributes",
         attributes: models.Attribute.getAttributes(),
       },

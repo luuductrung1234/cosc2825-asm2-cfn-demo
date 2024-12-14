@@ -29,6 +29,15 @@ const cartItemEntity = db().define("cartItems", {
       min: 1,
     },
   },
+  createdAt: {
+    type: Sequelize.DATE,
+    allowNull: false,
+    defaultValue: Sequelize.NOW,
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    allowNull: true,
+  },
 });
 
 cartEntity.hasMany(cartItemEntity, {

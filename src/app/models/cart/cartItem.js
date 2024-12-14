@@ -3,12 +3,16 @@ class CartItem {
    * @param {number} cartId
    * @param {number} productId
    * @param {number} quantity
+   * @param {Date} createdAt
+   * @param {Date} updatedAt
    */
-  constructor(cartId, productId, quantity) {
+  constructor(cartId, productId, quantity, createdAt, updatedAt) {
     this.id = null;
     this.cartId = cartId;
     this.productId = productId;
     this.quantity = quantity;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   static getAttributes = () => Object.keys(new CartItem());

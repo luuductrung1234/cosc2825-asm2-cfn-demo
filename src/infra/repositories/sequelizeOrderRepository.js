@@ -22,6 +22,7 @@ const listOrders = async (query) => {
       },
     ],
     order: [[query.sortBy || "createdAt", query.sortDirection || "DESC"]],
+    attributes: models.Order.getAttributes(),
   });
 };
 
@@ -35,7 +36,7 @@ const findById = async (id) => {
     include: [
       {
         model: dbContext.orderItems,
-        as: "items",
+        as: "orderItems",
         attributes: models.OrderItem.getAttributes(),
       },
     ],

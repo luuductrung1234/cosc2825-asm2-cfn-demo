@@ -36,7 +36,7 @@ const findById = async (id) => {
   for (const item of order.orderItems) {
     const product = await productRepository.findById(item.productId);
     orderItems.push({
-      ...item,
+      ...item.dataValues,
       title: product.title,
       description: product.description,
       imageUrl: product.imageUrl,
@@ -70,7 +70,6 @@ const findById = async (id) => {
 const addOrder = async (createOrderDto, createdBy) => {
   const order = await orderRepository.addOrder(
     new models.Order(
-      null,
       createOrderDto.customerId,
       createOrderDto.customerName,
       createOrderDto.customerEmail,

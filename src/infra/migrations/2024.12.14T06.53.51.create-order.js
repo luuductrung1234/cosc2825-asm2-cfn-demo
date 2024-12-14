@@ -15,45 +15,38 @@ async function up(queryInterface, Sequelize) {
    * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
    */
 
-  await queryInterface.createTable("products", {
+  await queryInterface.createTable("orders", {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    title: {
+    customerId: {
       type: Sequelize.STRING(255),
       allowNull: false,
     },
-    imageUrl: {
-      type: Sequelize.STRING(1000),
+    customerName: {
+      type: Sequelize.STRING(255),
       allowNull: false,
     },
-    description: {
-      type: Sequelize.STRING(2000),
-      allowNull: false,
+    customerEmail: {
+      type: Sequelize.STRING(255),
+      allowNull: true,
+      validator: {
+        isEmail: true,
+      },
     },
-    price: {
-      type: Sequelize.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    discountPrice: {
-      type: Sequelize.DECIMAL(10, 2),
+    customerPhone: {
+      type: Sequelize.STRING(255),
       allowNull: true,
     },
-    category: {
+    shippingAddress: {
+      type: Sequelize.STRING(500),
+      allowNull: false,
+    },
+    status: {
       type: Sequelize.STRING(255),
       allowNull: false,
-    },
-    recommended: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    isDeleted: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
     },
     createdBy: {
       type: Sequelize.STRING(255),
@@ -75,58 +68,55 @@ async function up(queryInterface, Sequelize) {
     },
   });
 
-  await queryInterface.createTable("attributes", {
+  await queryInterface.createTable("orderItems", {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+    orderId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
     productId: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    name: {
-      type: Sequelize.STRING(255),
+    quantity: {
+      type: Sequelize.INTEGER,
       allowNull: false,
+      validator: {
+        min: 1,
+      },
     },
-    displayName: {
-      type: Sequelize.STRING(500),
+    price: {
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
-    },
-    value: {
-      type: Sequelize.STRING(500),
-      allowNull: false,
-    },
-    createdBy: {
-      type: Sequelize.STRING(255),
-      allowNull: false,
-      defaultValue: "system",
-    },
-    updatedBy: {
-      type: Sequelize.STRING(255),
-      allowNull: true,
-    },
-    createdAt: {
-      type: Sequelize.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.fn("NOW"),
-    },
-    updatedAt: {
-      type: Sequelize.DATE,
-      allowNull: true,
     },
   });
 
-  await queryInterface.addConstraint("attributes", {
+  await queryInterface.addConstraint("orderItems", {
+    fields: ["orderId"],
+    type: "FOREIGN KEY",
+    name: "fk_order_id",
+    references: {
+      table: "orders",
+      field: "id",
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  });
+
+  await queryInterface.addConstraint("orderItems", {
     fields: ["productId"],
     type: "FOREIGN KEY",
-    name: "fk_product_id",
+    name: "fk_order_item_product_id",
     references: {
       table: "products",
       field: "id",
     },
-    onDelete: "cascade",
-    onUpdate: "cascade",
+    onDelete: "RESTRICT",
+    onUpdate: "CASCADE",
   });
 }
 
@@ -144,9 +134,6 @@ async function down(queryInterface, Sequelize) {
    * Example:
    * await queryInterface.dropTable('users');
    */
-
-  await queryInterface.dropTable("attributes");
-  await queryInterface.dropTable("products");
 }
 
 module.exports = { up, down };

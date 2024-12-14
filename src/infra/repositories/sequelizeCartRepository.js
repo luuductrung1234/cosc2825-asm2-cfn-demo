@@ -92,6 +92,7 @@ const loadCart = async (customerId) => {
         attributes: models.CartItem.getAttributes(),
       },
     ],
+    attributes: models.Cart.getAttributes(),
   });
 };
 

@@ -53,7 +53,7 @@ const auth = async (req, res, next) => {
     const session = await cognitoExpressSession();
     const response = await session.validate(token);
     req.auth.userId = response.sub;
-    req.auth.username = response["cognito:email"];
+    req.auth.username = response["email"];
     req.auth.groups = response["cognito:groups"] || [];
     req.auth.isAuth = true;
     next();

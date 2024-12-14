@@ -5,12 +5,14 @@ class OrderItem {
    * @param {number} quantity
    * @param {number} price
    */
-  constructor(orderId, productId, quantity, price) {
+  constructor(orderId, productId, quantity, price, createdAt, updatedAt) {
     this.id = null;
     this.orderId = orderId;
     this.productId = productId;
     this.quantity = quantity;
     this.price = price;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   static getAttributes = () => Object.keys(new OrderItem());

@@ -1,10 +1,14 @@
 class Cart {
   /**
    * @param {string} customerId
+   * @param {Date} createdAt
+   * @param {Date} updatedAt
    */
-  constructor(customerId) {
+  constructor(customerId, createdAt, updatedAt) {
     this.id = null;
     this.customerId = customerId;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   static getAttributes = () => Object.keys(new Cart());

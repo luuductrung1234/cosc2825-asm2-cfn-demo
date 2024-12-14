@@ -33,10 +33,19 @@ const orderItemEntity = db().define("orderItems", {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
   },
+  createdAt: {
+    type: Sequelize.DATE,
+    allowNull: false,
+    defaultValue: Sequelize.NOW,
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    allowNull: true,
+  },
 });
 
 orderEntity.hasMany(orderItemEntity, {
-  onDelete: "RESTRICT",
+  onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
 

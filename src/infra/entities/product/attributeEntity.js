@@ -50,7 +50,7 @@ const attributeEntity = db().define("attributes", {
 });
 
 productEntity.hasMany(attributeEntity, {
-  onDelete: "RESTRICT",
+  onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
 
@@ -58,4 +58,4 @@ attributeEntity.belongsTo(productEntity, {
   foreignKey: "productId",
 });
 
-module.exports = productEntity;
+module.exports = attributeEntity;

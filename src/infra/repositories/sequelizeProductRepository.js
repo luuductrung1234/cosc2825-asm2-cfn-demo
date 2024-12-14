@@ -26,38 +26,69 @@ const listProducts = async (query) => {
     isDeleted: query.isDeleted || false,
   };
 
-  if (query.recommended !== undefined) {
+  let attributesWhere = undefined;
+
+  let having = {};
+
+  if (query.recommended !== undefined && query.recommended !== null) {
     where.recommended = query.recommended;
   }
-  if (query.featured !== undefined) {
-    where.featured = query.featured;
+  if (query.featured !== undefined && query.featured !== null) {
+    attributesWhere = { name: "featured" };
+    having["attributes.name"] = "featured";
   }
-  if (query.isDiscount !== undefined) {
+  if (query.isDiscount !== undefined && query.isDiscount !== null) {
     where.discountPrice = { [Op.ne]: null };
   }
-  if (query.searchText !== undefined) {
+  if (query.searchText !== undefined && query.searchText !== null) {
     where.title = { [Op.like]: `%${query.searchText}%` };
   }
 
-  let products = await dbContext.products.findAndCountAll({
-    include: [
-      {
-        model: dbContext.attributes,
-        as: "attributes",
-        attributes: models.Attribute.getAttributes(),
-      },
-    ],
-    where: where,
-    order: [[query.sortBy || "createdAt", query.sortDirection || "DESC"]],
-    offset: (query.pageIndex || 0) * (query.pageSize || 8),
-    limit: query.pageSize || 8,
-    attributes: models.Product.getAttributes(),
-  });
+  try {
+    let products = await dbContext.products.findAll({
+      where: where,
+      subQuery:
+        query.pageIndex !== undefined && query.pageIndex !== null
+          ? true
+          : false,
+      include: [
+        {
+          model: dbContext.attributes,
+          as: "attributes",
+          attributes: models.Attribute.getAttributes(),
+        },
+      ],
+      having: having,
+      order: [[query.sortBy || "createdAt", query.sortDirection || "DESC"]],
+      offset: (query.pageIndex || 0) * (query.pageSize || 1000),
+      limit: query.pageSize || 1000,
+      attributes: models.Product.getAttributes(),
+    });
 
-  return {
-    products: products.rows,
-    totalCount: products.count,
-  };
+    let count = await dbContext.products.count({
+      where: where,
+      subQuery: false,
+      distinct: true,
+      col: "id",
+      include: [
+        {
+          model: dbContext.attributes,
+          as: "attributes",
+          attributes: models.Attribute.getAttributes(),
+          required: attributesWhere ? true : false,
+          where: attributesWhere,
+        },
+      ],
+    });
+
+    return {
+      products: products,
+      totalCount: count,
+    };
+  } catch (error) {
+    console.error(error);
+    return { products: [], totalCount: 0 };
+  }
 };
 
 /**

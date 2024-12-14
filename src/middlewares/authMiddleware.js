@@ -53,7 +53,7 @@ const auth = async (req, res, next) => {
     const session = await cognitoExpressSession();
     const response = await session.validate(token);
     req.auth.userId = response.sub;
-    req.auth.username = response["cognito:username"];
+    req.auth.username = response["cognito:email"];
     req.auth.groups = response["cognito:groups"] || [];
     req.auth.isAuth = true;
     next();
@@ -65,16 +65,14 @@ const auth = async (req, res, next) => {
 
 const constructHostedURL = async () => {
   let url = "";
-  let userPoolId = await getSecretValue(
-    process.env.COGNITO_USER_POOL_ID_SECRET_NAME
-  );
-  let clientId = await getSecretValue(
+  let userPoolId = getSecretValue(process.env.COGNITO_USER_POOL_ID_SECRET_NAME);
+  let clientId = getSecretValue(
     process.env.COGNITO_USER_POOL_CLIENT_ID_SECRET_NAME
   );
-  let redirectUri = await getSecretValue(
+  let redirectUri = getSecretValue(
     process.env.COGNITO_USER_POOL_REDIRECT_URI_SECRET_NAME
   );
-  let domain = await getSecretValue(process.env.COGNITO_DOMAIN_SECRET_NAME);
+  let domain = getSecretValue(process.env.COGNITO_DOMAIN_SECRET_NAME);
 
   if (domain && userPoolId && redirectUri && redirectUri) {
     //
@@ -86,7 +84,7 @@ const constructHostedURL = async () => {
   url += "/login?client_id=";
   url += clientId;
   url += "&response_type=token";
-  url += "&scope=openid";
+  url += "&scope=email openid phone";
   url += "&redirect_uri=";
   url += encodeURIComponent(redirectUri);
 
